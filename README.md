@@ -43,6 +43,7 @@ Algorithm/
 |------|------------|------------|
 | [Two Pointers](Techniques/TwoPointers.md) | O(n) | O(1) |
 | [Sliding Window](Techniques/SlidingWindow.md) | O(n) | O(1) |
+| [Merge Intervals](Techniques/MergeIntervals.md) | O(n log n) | O(n) |
 | [Brute Force](Techniques/BruteForce.md) | O(n²)～O(n!) | O(1) |
 | [Recursion](Techniques/Recursion.md) | 依問題而定 | O(深度) |
 
@@ -52,6 +53,7 @@ C# 實作專案，使用 .NET 8。
 
 - **SlidingWindow**：滑動窗口實作（含 MaxSlidingWindow）
 - **Recursion**：遞迴實作（如 Add Two Numbers）
+- **MergeAndSortIntervals**：合併區間（含 OrderBy 版與手寫 QuickSort 版）
 
 ### 建置與執行
 
