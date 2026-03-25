@@ -14,7 +14,7 @@ public class TwoSumTest
     {
         var sut = new TwoSum();
 
-        var result = sut.Execute(nums, target);
+        var result = sut.TwoSumWithBruteForce(nums, target);
         result.Should().BeEquivalentTo(expected);
     }
 }

@@ -37,7 +37,7 @@ Only one valid answer exists.
 Follow-up: Can you come up with an algorithm that is less than O(n2) time complexity?
      */
     
-    public int[] Execute(int[] nums, int target)
+    public int[] TwoSumWithBruteForce(int[] nums, int target)
     {
         for (int i = 0; i < nums.Length; i++)
         {
