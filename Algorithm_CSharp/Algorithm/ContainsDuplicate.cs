@@ -41,7 +41,7 @@ Constraints:
 1 <= nums.length <= 105
 -109 <= nums[i] <= 109
      */
-    public bool Execute(int[] nums)
+    public bool ContainsDuplicateWithHashTable(int[] nums)
     {
         var hashTable = new Hashtable();
         for (int i = 0; i < nums.Length ; i++)
@@ -54,5 +54,49 @@ Constraints:
             hashTable.Add(nums[i], i);
         }
         return false;
+    }
+
+    public bool ContainsDuplicateWithHashSet(int[] nums)
+    {
+        var hashSet = new HashSet<int>();
+        for (int i = 0; i < nums.Length ; i++)
+        {
+            if (hashSet.Contains(nums[i]))
+            {
+                return true;
+            }
+            hashSet.Add(nums[i]);
+        }
+        return false;
+    }
+
+    public bool ContainsDuplicateWithSort(int[] nums)
+    {
+        Array.Sort(nums);
+        for (int i = 0; i < nums.Length - 1; i++)
+        {
+            if (nums[i] == nums[i + 1])
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+    public bool ContainsDuplicateWithInsertionSort(int[] nums)
+    {
+        int n = nums.Length;
+       for (int i = 1; i < n; i++) {
+            int current = nums[i];
+            int j = i - 1;
+
+            while (j >= 0 && nums[j] > current) {
+                nums[j + 1] = nums[j];
+                j--; 
+            }
+            if (j >= 0 && nums[j] == current) 
+                return true;
+            nums[j + 1] = current;
+       }
+       return false;
     }
 }
