@@ -52,4 +52,35 @@ Follow-up: Can you come up with an algorithm that is less than O(n2) time comple
 
         return [];
     }
+
+    public int[] TwoSumWithTwoPointers(int[] nums, int target)
+    {
+        var indexed = nums
+            .Select((value, i) => (value, i))
+            .OrderBy(x => x.value)
+            .ToArray();
+
+        int left = 0;
+        int right = indexed.Length - 1;
+
+        while (left < right)
+        {
+            int sum = indexed[left].value + indexed[right].value;
+            if (sum == target)
+            {
+                return [indexed[left].i, indexed[right].i];
+            }
+            else if (sum < target)
+            {
+                left++;
+            }
+            else
+            {
+                right--;
+            }
+        }
+        return [];
+    }
+    
+    
 }
