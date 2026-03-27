@@ -28,4 +28,16 @@ public class TwoSumTest
         var result = sut.TwoSumWithTwoPointers(nums, target);
         result.Should().BeEquivalentTo(expected);
     }
+
+    [TestCase(new int[] { 2, 7, 11, 15 }, 9, new [] {0, 1})]
+    [TestCase(new int[] { 3, 2, 4 }, 6, new [] {1, 2})]
+    [TestCase(new int[] { 3, 3 }, 6, new [] {0, 1})]
+    [TestCase(new int[] { 1, 1, 1, 1, 1, 4, 1, 1, 1, 1, 1, 7, 1, 1, 1, 1, 1 }, 11, new [] {5, 11})]
+    public void TwoSum_WithHashMap(int[] nums, int target, int[] expected)
+    {
+        var sut = new TwoSum();
+
+        var result = sut.TwoSumWithHaspMap(nums, target);
+        result.Should().BeEquivalentTo(expected);
+    }
 }
