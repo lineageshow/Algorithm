@@ -58,4 +58,32 @@ strs[i] consists of lowercase English letters.
         
     }
 
+    public IList<IList<string>> GroupAnagramsWithCharacterCount(string[] strs) 
+    {
+        if (strs.Length == 1)
+            return new List<IList<string>> { strs };
+
+        var dict = new  Dictionary<string, List<string>>();
+
+        foreach (var str in strs)
+        {
+            var characterCount = new int[26];
+
+            foreach (var chr in str)
+            {
+                characterCount [chr - 'a']++;
+            }
+
+            var key = string.Concat(characterCount);
+            // var key = string.Join("$", characterCount);
+            if (!dict.TryGetValue(key, out var list))
+            {
+                list = new List<string>();
+                dict.Add(key, list);
+            }
+            list.Add(str);
+        }
+        return dict.Values.ToList<IList<string>>();
+    }
+
 }
