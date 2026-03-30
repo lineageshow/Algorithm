@@ -74,8 +74,8 @@ strs[i] consists of lowercase English letters.
                 characterCount [chr - 'a']++;
             }
 
-            var key = string.Concat(characterCount);
-            // var key = string.Join("$", characterCount);
+            var key = string.Join("$", characterCount);
+            
             if (!dict.TryGetValue(key, out var list))
             {
                 list = new List<string>();
