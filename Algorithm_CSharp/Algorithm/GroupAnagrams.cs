@@ -44,56 +44,18 @@ strs[i] consists of lowercase English letters.
             return  new List<IList<string>> {strs};
         }
         var result = new List<IList<string>>();
-        for (int i = 0; i < strs.Length; i++)
-        {
-            var tester = strs[i];
-            result[i].Add(tester);
-            for (int j = 0; j < strs.Length - i + 1; j++)
-            {
-                if (ValidAnagram(tester, strs[j]))
-                {
-                    result[i].Add(strs[j]);
-                }
-            }
-        }
-        return result;
-    }
 
-    private bool ValidAnagram(string s, string t)
-    {
-        if (s.Length != t.Length)
-            return false;
+        // Sorting each string in the array
+        var sortedStrs = strs.Select(s => string.Concat(s.OrderBy(c => c))).ToArray();
+        // Grouping the strings by the sorted string
+        var dict = new Dictionary<string, List<string>>();
+        for (int i = 0; i < sortedStrs.Length; i++)
+        {
+            if (!dict.TryAdd(sortedStrs[i], new List<string> { strs[i] }))
+                dict[sortedStrs[i]].Add(strs[i]);
+        }
+        return dict.Values.ToList<IList<string>>();
         
-        var dictS = new Dictionary<char, int>();
-        var dictT = new Dictionary<char, int>();
-
-        for (int i = 0; i < s.Length; i++)
-        {
-            if (!dictS.TryAdd(s[i], 1))
-            {
-                dictS[s[i]]++;
-            }
-
-            if (!dictT.TryAdd(t[i], 1))
-            {
-                dictT[t[i]]++;
-            }
-        }
-
-        foreach (var keyValue in dictS)
-        {
-            if (dictT.TryGetValue(keyValue.Key,  out var v))
-            {
-                if (keyValue.Value != v)
-                {
-                    return false;
-                }
-            }
-            else
-            {
-                return false;
-            }
-        }
-        return true;
     }
+
 }
