@@ -1,16 +1,17 @@
 # Algorithm
 
-演算法學習筆記與實作，包含排序、搜尋、圖遍歷與解題技巧的說明文件，以及 C# 實作範例。
+演算法學習筆記與實作，包含排序、搜尋、圖遍歷、解題技巧與資料結構的說明文件，以及 C# 實作範例。
 
 ## 目錄結構
 
 ```
 Algorithm/
-├── Sort/           # 排序演算法
-├── Search/         # 搜尋演算法
-├── Graph/          # 圖演算法
-├── Techniques/     # 解題技巧
-└── Algorithm_CSharp/   # C# 實作
+├── Sort/              # 排序演算法
+├── Search/            # 搜尋演算法
+├── Graph/             # 圖演算法
+├── Techniques/        # 解題技巧
+├── DataStructures/    # 資料結構
+└── Algorithm_CSharp/  # C# 實作
 ```
 
 ## Sort（排序）
@@ -46,6 +47,16 @@ Algorithm/
 | [Merge Intervals](Techniques/MergeIntervals.md) | O(n log n) | O(n) |
 | [Brute Force](Techniques/BruteForce.md) | O(n²)～O(n!) | O(1) |
 | [Recursion](Techniques/Recursion.md) | 依問題而定 | O(深度) |
+
+## DataStructures（資料結構）
+
+| 資料結構 | 重點 |
+|----------|------|
+| [Hash Map](DataStructures/HashMap.md) | 鍵值映射、計數與索引；搭配 [Hash Table](Search/HashTable.md) |
+| [Stack](DataStructures/Stack.md) | LIFO、括號與 DFS；見 [DFS](Graph/DFS.md) |
+| [Queue](DataStructures/Queue.md) | FIFO、BFS；見 [BFS](Graph/BFS.md) |
+| [Heap](DataStructures/Heap.md) | 優先佇列、Top K；搭配 [Heap Sort](Sort/HeapSort.md) |
+| [Linked List](DataStructures/LinkedList.md) | 鏈結、快慢指針 |
 
 ## Algorithm_CSharp
 
