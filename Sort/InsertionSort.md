@@ -31,6 +31,31 @@
 - `i=2`：插入 `4` → `[2, 4, 5, 6, 1, 3]`
 - `i=3`：插入 `6` → 已在位 → `[2, 4, 5, 6, 1, 3]`
 - 依此類推，最終 `[1, 2, 3, 4, 5, 6]`
+  
+### 程式碼範例（C#，原地排序）
+
+```csharp
+public static void InsertionSort(int[] nums)
+{
+    if (nums == null || nums.Length <= 1) return;
+
+    for (int i = 1; i < nums.Length; i++)
+    {
+        int current = nums[i];
+        int j = i - 1;
+
+        while (j >= 0 && nums[j] > current)
+        {
+            nums[j + 1] = nums[j];
+            j--;
+        }
+
+        nums[j + 1] = current;
+    }
+}
+```
+
+> 補充：這個版本是穩定排序（條件用 `>`，相等時不左移）。
 
 ---
 

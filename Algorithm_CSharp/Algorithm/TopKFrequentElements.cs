@@ -6,10 +6,8 @@ public class TopKFrequentElements
 {
     /*
 347. Top K Frequent Elements
-Medium
-Topics
-premium lock icon
-Companies
+Medium Topics:Array, Hash Table, Divide and Conquer, Sorting, Heap (Priority Queue), Bucket Sort, Counting, Quickselect
+
 Given an integer array nums and an integer k, return the k most frequent elements. You may return the answer in any order.
 
  
@@ -68,5 +66,26 @@ Follow up: Your algorithm's time complexity must be better than O(n log n), wher
                 result.AddRange(bucket[i]);
         }
         return result.Take(k).ToArray();
+    }
+
+    public int[] TopKFrequentWithHeap(int[] nums, int k)
+    {
+        var dict = new Dictionary<int, int>();
+        for (int i = 0; i < nums.Length; i++)
+        {
+            if (!dict.TryAdd(nums[i], 1))
+                dict[nums[i]]++;
+        }
+        var minHeap = new PriorityQueue<int, int>();
+        foreach (var keyValue in dict)
+        {
+            minHeap.Enqueue(keyValue.Key, keyValue.Value);
+            if (minHeap.Count > k)
+                minHeap.Dequeue();
+        }
+        var result = new List<int>();
+        while (minHeap.Count > 0)
+            result.Add(minHeap.Dequeue());
+        return result.ToArray();
     }
 }
