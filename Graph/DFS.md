@@ -40,9 +40,9 @@
 4. 將 `cur` 的未訪問鄰居壓入堆疊。
 5. 重複步驟 2～4 直到堆疊為空。
 
-### 範例：二元樹前序遍歷
+### 範例：二元樹前序遍歷的完整過程
 
-```
+```text
       1
      / \
     2   3
@@ -52,6 +52,95 @@
 
 - 前序（根→左→右）：`1` → `2` → `4` → `5` → `3`
 - 結果：`[1, 2, 4, 5, 3]`
+
+#### 🛠 遞迴版完整執行過程（利用系統呼叫堆疊 Call Stack）
+1. **呼叫 `DFS(1)`**: 訪問 `1` (Result: `[1]`)，接著呼叫左子節點 `DFS(2)`。
+2. **呼叫 `DFS(2)`**: 訪問 `2` (Result: `[1, 2]`)，接著呼叫左子節點 `DFS(4)`。
+3. **呼叫 `DFS(4)`**: 訪問 `4` (Result: `[1, 2, 4]`)，`4` 無子節點，**退回**到 `DFS(2)`。
+4. **回到 `DFS(2)`**: 左邊走完了，換走右邊，呼叫右子節點 `DFS(5)`。
+5. **呼叫 `DFS(5)`**: 訪問 `5` (Result: `[1, 2, 4, 5]`)，`5` 無子節點，**退回**到 `DFS(2)`。
+6. **回到 `DFS(2)`**: 左右兩邊皆走完任務結束，**退回**到最初的 `DFS(1)`。
+7. **回到 `DFS(1)`**: 左邊走完了，換走右邊，呼叫右子節點 `DFS(3)`。
+8. **呼叫 `DFS(3)`**: 訪問 `3` (Result: `[1, 2, 4, 5, 3]`)，`3` 無子節點，**退回**到 `DFS(1)`。
+9. **回到 `DFS(1)`**: 全部走完，程式結束。
+
+#### 🛠 迭代版完整執行過程（手動控制 Stack）
+> 💡 技巧：為了保持前序「根→左→右」的打出順序，壓入 Stack 時必須**「先壓右、再壓左」**，這樣彈出時才會先處理左邊 (因為 Stack 是後進先出 LIFO)。
+
+1. **初始狀態**：Stack = `[1]`，Result = `[]`
+2. **彈出 `1`** (並訪問)：(Result: `[1]`)
+   - 壓入右邊 `3`，再壓入左邊 `2`。
+   - 此時 Stack = `[3, 2]`
+3. **彈出 `2`** (並訪問)：(Result: `[1, 2]`)
+   - 壓入右邊 `5`，再壓入左邊 `4`。
+   - 此時 Stack = `[3, 5, 4]`
+4. **彈出 `4`** (並訪問)：(Result: `[1, 2, 4]`)
+   - 沒小孩可以壓入。
+   - 此時 Stack = `[3, 5]`
+5. **彈出 `5`** (並訪問)：(Result: `[1, 2, 4, 5]`)
+   - 沒小孩可以壓入。
+   - 此時 Stack = `[3]`
+6. **彈出 `3`** (並訪問)：(Result: `[1, 2, 4, 5, 3]`)
+   - 沒小孩可以壓入。
+   - 此時 Stack = `[]`
+7. Stack 為空，程式結束。
+
+#### 📝 C# 實作程式碼
+
+```csharp
+public class TreeNode {
+    public int val;
+    public TreeNode left;
+    public TreeNode right;
+    public TreeNode(int val = 0, TreeNode left = null, TreeNode right = null) {
+        this.val = val;
+        this.left = left;
+        this.right = right;
+    }
+}
+
+public class DFS_Example {
+    // ======== 遞迴版 ========
+    public IList<int> PreorderTraversalRecursive(TreeNode root) {
+        List<int> result = new List<int>();
+        DFS(root, result);
+        return result;
+    }
+
+    private void DFS(TreeNode node, List<int> result) {
+        if (node == null) return;
+        
+        result.Add(node.val);      // 根 (處理當前節點)
+        DFS(node.left, result);    // 左
+        DFS(node.right, result);   // 右
+    }
+
+    // ======== 迭代版 ========
+    public IList<int> PreorderTraversalIterative(TreeNode root) {
+        List<int> result = new List<int>();
+        if (root == null) return result;
+
+        Stack<TreeNode> stack = new Stack<TreeNode>();
+        stack.Push(root);
+
+        while (stack.Count > 0) {
+            TreeNode node = stack.Pop();
+            result.Add(node.val);  // 根 (處理當前節點)
+
+            // 先壓入右邊，這樣彈出時才會晚處理 (LIFO 特性)
+            if (node.right != null) {
+                stack.Push(node.right);
+            }
+            // 再壓入左邊，這樣彈出時就會先處理
+            if (node.left != null) {
+                stack.Push(node.left);
+            }
+        }
+
+        return result;
+    }
+}
+```
 
 ---
 
