@@ -6,7 +6,10 @@ public class TwoSumll_InputArrayIsSorted
 167. Two Sum II - Input Array Is Sorted
 Medium Topics: Array, Two Pointers, Binary Search
 
-Given a 1-indexed array of integers numbers that is already sorted in non-decreasing order, find two numbers such that they add up to a specific target number. Let these two numbers be numbers[index1] and numbers[index2] where 1 <= index1 < index2 <= numbers.length.
+Given a 1-indexed array of integers numbers that is already sorted in non-decreasing order, 
+find two numbers such that they add up to a specific target number. 
+Let these two numbers be numbers[index1] and numbers[index2] 
+where 1 <= index1 < index2 <= numbers.length.
 
 Return the indices of the two numbers, index1 and index2, added by one as an integer array [index1, index2] of length 2.
 
@@ -41,8 +44,31 @@ numbers is sorted in non-decreasing order.
 The tests are generated such that there is exactly one solution.
      */
 
-    public int[] TwoSum(int[] numbers, int target)
+    public int[] TwoSumWithBinarySearch(int[] numbers, int target)
     {
-        throw new NotImplementedException();
+
+     for(int i = 0; i < numbers.Length; i++)
+     {
+        int complement = target - numbers[i];
+        int left = i + 1;
+        int right = numbers.Length - 1;
+        while(left <= right)
+        {
+            int mid = left + (right - left) / 2;
+            if(numbers[mid] == complement)
+            {
+                return new int[] { i + 1, mid + 1 };
+            }
+            else if(numbers[mid] < complement)
+            {
+                left = mid + 1;
+            }
+            else
+            {
+                right = mid - 1;    
+            }
+        }
+     }   
+     return new int[] { -1, -1 };
     }
 }
