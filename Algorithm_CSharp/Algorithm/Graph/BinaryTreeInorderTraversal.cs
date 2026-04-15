@@ -9,14 +9,11 @@ Easy Topics: Stack, Tree, Depth-First Search, Binary Tree
 Given the root of a binary tree, return the inorder traversal of its nodes' values.
 
 Example 1:
-
-/*
   1
    \
     2
    /
   3 
-*/
 Input: root = [1,null,2,3]
 Output: [1,3,2]
 
@@ -27,15 +24,12 @@ Output: []
 
 Example 3:
 
-/*
   1
-*/
 Input: root = [1]
 Output: [1]
 
 Example 4:
 
-/*
       1
      / \
     2   3
@@ -43,7 +37,6 @@ Example 4:
   4   5   8
      / \ / 
     6  7 9
-*/
 Input: root = [1,2,3,4,5,null,8,null,null,6,7,9]
 Output: [4,2,6,5,7,1,3,9,8]
 
@@ -53,13 +46,42 @@ The number of nodes in the tree is in the range [0, 100].
 -100 <= Node.val <= 100
 
 Follow up: Recursive solution is trivial, could you do it iteratively?
-     */
+*/
 
-    public IList<int> InorderTraversal(TreeNode root)
+    public IList<int> InorderTraversalWithRecursive(TreeNode root)
     {
-        throw new NotImplementedException();
+        var result = new List<int>();
+        Recursive(root, result);
+        return result;
     }
 
+    private void Recursive(TreeNode node, IList<int> result)
+    {
+        if(node == null)
+            return;
+        Recursive(node.left, result);
+        result.Add(node.val);
+        Recursive(node.right, result);
+
+    }
+    public IList<int> InorderTraversalWithStack(TreeNode root)
+    {
+        var result = new List<int>();
+        var stack = new Stack<TreeNode>();
+        var current = root;
+        while (current != null || stack.Count > 0)
+        {
+            while (current != null)
+            {
+                stack.Push(current);
+                current = current.left;
+            }
+            current = stack.Pop();
+            result.Add(current.val);
+            current = current.right;
+        }
+        return result;
+    }
     public class TreeNode 
     {
         public int val;
