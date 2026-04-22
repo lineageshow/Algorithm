@@ -98,7 +98,6 @@ Follow up: Recursive solution is trivial, could you do it iteratively?
             var node = stack.Peek();
             if (node.left == null && node.right == null)
             {
-                Console.WriteLine($"node.val:{node.val}");
                 stack.Pop();
                 result.Add(node.val);
             }
